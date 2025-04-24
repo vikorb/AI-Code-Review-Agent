@@ -1,0 +1,32 @@
+# Code Review Agent Configuration
+
+# API Keys
+# Replace with your actual API keys or use environment variables
+api_keys:
+  openai: "YOUR_OPENAI_API_KEY"
+  anthropic: "YOUR_ANTHROPIC_API_KEY"
+
+# Default models to use for each provider
+models:
+  openai: "gpt-4"
+  anthropic: "claude-3-sonnet-20240229"
+  ollama: "mistral"
+
+# Default review mode
+default_mode: "default"
+
+# Output settings
+output:
+  # Default output directory for reviews
+  directory: "reviews"
+  # Save format for reviews (markdown or json)
+  format: "markdown"
+
+# Review settings
+review:
+  # Maximum file size to analyze (in KB)
+  max_file_size: 500
+  # Maximum number of files to analyze in batch mode
+  max_batch_size: 10
+  # Whether to include line numbers in reviews
+  include_line_numbers: true

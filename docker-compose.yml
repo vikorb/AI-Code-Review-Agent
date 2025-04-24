@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  code-review-cli:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+      - ./reviews:/app/reviews
+    env_file:
+      - .env
+    # Command to run CLI
+    # Example: docker-compose run code-review-cli cli.py --file examples/buggy_script.py --mode strict
+
+  code-review-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./:/app
+      - ./reviews:/app/reviews
+    env_file:
+      - .env
+    command: ["streamlit", "run", "streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    # To run the web UI: docker-compose up code-review-web
+
+  # Optional Ollama service - uncomment to use
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   # To run Ollama: docker-compose up ollama
+
+# Optional volume for Ollama data
+# volumes:
+#   ollama_data:
